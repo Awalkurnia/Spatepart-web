@@ -9,41 +9,53 @@
 </head>
 <body>
     <header>
-        <h1>🛒 TokoKita</h1>
-        <p>Pilihan produk terbaik, harga bersahabat!</p>
+        <h1>🛒 DAFTAR SPAREPART HIPRA INDONESIA</h1>
+        <p>Product Spraepart terbaik HIPRA</p>
     </header>
     <main>
         <div class="product-list" id="product-list"></div>
     </main>
     <footer>
-        &copy; 2025 TokoKita. All rights reserved.
+        &copy; 2025 HIPRA. All rights reserved.
     </footer>
+    <!-- Modal Detail Produk -->
+    <div id="modal-detail" class="modal">
+        <div class="modal-content">
+            <span class="close" id="close-modal">&times;</span>
+            <div id="modal-body"></div>
+        </div>
+    </div>
     <script>
         const products = [
             {
-                name: "Kemeja Flanel",
+                name: "Blue Cone Nozel",
                 price: 120000,
                 detail: "Kemeja flanel lengan panjang, bahan lembut dan nyaman dipakai.",
+                image: "image/nozel blue.png"
             },
             {
-                name: "Celana Jeans",
+                name: "Yellow Cone Nozel",
                 price: 175000,
                 detail: "Celana jeans slim fit warna biru muda, cocok untuk sehari-hari.",
+                image: "image/nozel yellow.png"
             },
             {
-                name: "Kaos Polos",
+                name: "Anti Drop",
                 price: 50000,
                 detail: "Kaos polos katun combed 30s, tersedia berbagai warna.",
+                image: "image/anti drop.png"
             },
             {
-                name: "Jaket Hoodie",
+                name: "Green Cone Nozel",
                 price: 210000,
                 detail: "Jaket hoodie hangat, cocok untuk cuaca dingin.",
+                image: "image/nozel green.png"
             },
             {
-                name: "Sepatu Sneakers",
+                name: "Orange Cone Nozel",
                 price: 320000,
                 detail: "Sneakers trendy, nyaman digunakan untuk aktivitas harian.",
+                image: "image/nozel orange.png"
             }
         ];
 
@@ -52,19 +64,45 @@
         }
 
         const productList = document.getElementById('product-list');
-        products.forEach(prod => {
+        products.forEach((prod, i) => {
             const div = document.createElement('div');
             div.className = 'product-card';
             div.innerHTML = `
                 <div class="product-img">
-                    <img src="https://source.unsplash.com/300x200/?${encodeURIComponent(prod.name)}" alt="${prod.name}">
+                    <img src="${prod.image}" alt="${prod.name}">
                 </div>
                 <h2>${prod.name}</h2>
                 <p class="price">${formatRupiah(prod.price)}</p>
                 <p class="detail">${prod.detail}</p>
             `;
+            div.addEventListener('click', () => showDetail(i));
             productList.appendChild(div);
         });
+
+        // Modal logic
+        const modal = document.getElementById('modal-detail');
+        const modalBody = document.getElementById('modal-body');
+        const closeModal = document.getElementById('close-modal');
+
+        function showDetail(index) {
+            const prod = products[index];
+            modalBody.innerHTML = `
+                <img src="${prod.image}" alt="${prod.name}" class="modal-img">
+                <h2>${prod.name}</h2>
+                <p class="modal-price">${formatRupiah(prod.price)}</p>
+                <p class="modal-detail">${prod.detail}</p>
+            `;
+            modal.style.display = "block";
+        }
+
+        closeModal.onclick = function() {
+            modal.style.display = "none";
+        }
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
     </script>
 </body>
 </html>
