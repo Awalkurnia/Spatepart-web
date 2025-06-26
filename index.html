@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Produk Menarik</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>🛒 TokoKita</h1>
+        <p>Pilihan produk terbaik, harga bersahabat!</p>
+    </header>
+    <main>
+        <div class="product-list" id="product-list"></div>
+    </main>
+    <footer>
+        &copy; 2025 TokoKita. All rights reserved.
+    </footer>
+    <script>
+        const products = [
+            {
+                name: "Kemeja Flanel",
+                price: 120000,
+                detail: "Kemeja flanel lengan panjang, bahan lembut dan nyaman dipakai.",
+            },
+            {
+                name: "Celana Jeans",
+                price: 175000,
+                detail: "Celana jeans slim fit warna biru muda, cocok untuk sehari-hari.",
+            },
+            {
+                name: "Kaos Polos",
+                price: 50000,
+                detail: "Kaos polos katun combed 30s, tersedia berbagai warna.",
+            },
+            {
+                name: "Jaket Hoodie",
+                price: 210000,
+                detail: "Jaket hoodie hangat, cocok untuk cuaca dingin.",
+            },
+            {
+                name: "Sepatu Sneakers",
+                price: 320000,
+                detail: "Sneakers trendy, nyaman digunakan untuk aktivitas harian.",
+            }
+        ];
+
+        function formatRupiah(angka) {
+            return 'Rp ' + angka.toLocaleString('id-ID');
+        }
+
+        const productList = document.getElementById('product-list');
+        products.forEach(prod => {
+            const div = document.createElement('div');
+            div.className = 'product-card';
+            div.innerHTML = `
+                <div class="product-img">
+                    <img src="https://source.unsplash.com/300x200/?${encodeURIComponent(prod.name)}" alt="${prod.name}">
+                </div>
+                <h2>${prod.name}</h2>
+                <p class="price">${formatRupiah(prod.price)}</p>
+                <p class="detail">${prod.detail}</p>
+            `;
+            productList.appendChild(div);
+        });
+    </script>
+</body>
+</html>
